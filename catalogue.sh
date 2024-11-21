@@ -8,7 +8,7 @@ cd /app
 unzip /tmp/catalogue.zip
 cd /app
 npm install
-cd ..
+cd /home/centos/roboshop-shell-d76
 cp catalogue.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
 systemctl enable catalogue
