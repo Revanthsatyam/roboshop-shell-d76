@@ -127,6 +127,7 @@ func_python() {
 func_golang() {
   echo -e "\e[36m>>>>>>>>> Install Golang <<<<<<<<<<\e[0m"
   dnf install golang -y &>>${log}
+  func_exit_status
 
   func_appreq
 
@@ -135,6 +136,7 @@ func_golang() {
   go mod init dispatch &>>${log}
   go get &>>${log}
   go build &>>${log}
+  func_exit_status
 
   func_systemctl
 }
