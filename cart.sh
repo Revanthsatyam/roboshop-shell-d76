@@ -3,6 +3,8 @@ source common.sh
 component=cart
 schema_enabled=no
 
+func_nodejs
+
 #dnf module disable nodejs -y
 #dnf module enable nodejs:18 -y
 #dnf install nodejs -y

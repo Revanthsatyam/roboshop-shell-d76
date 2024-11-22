@@ -4,6 +4,8 @@ component=catalogue
 schema_enabled=yes
 schema_type=mongodb
 
+func_nodejs
+
 #dnf module disable nodejs -y
 #dnf module enable nodejs:18 -y
 #dnf install nodejs -y
