@@ -45,6 +45,7 @@ func_appreq() {
   func_exit_status
 
   echo -e "\e[36m>>>>>>>>> Download Application Content <<<<<<<<<<\e[0m"
+  rmdir app &>>${log}
   mkdir /app &>>${log}
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   func_exit_status
