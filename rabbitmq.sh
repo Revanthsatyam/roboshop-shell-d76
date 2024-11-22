@@ -8,5 +8,5 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/sc
 dnf install rabbitmq-server -y
 systemctl enable rabbitmq-server
 systemctl restart rabbitmq-server
-rabbitmqctl add_user roboshop ${rabbitmq_pass}
+rabbitmqctl add_user roboshop ${rabbitmq_pass} #roboshop123
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
