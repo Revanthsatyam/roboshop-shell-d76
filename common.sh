@@ -100,3 +100,17 @@ func_java() {
     func_schema
   fi
 }
+
+func_python() {
+  echo -e "\e[36m>>>>>>>>> Install Python <<<<<<<<<<\e[0m"
+  dnf install python36 gcc python3-devel -y &>>${log}
+  func_exit_status
+
+  func_appreq
+
+  echo -e "\e[36m>>>>>>>>> Download Dependencies <<<<<<<<<<\e[0m"
+  pip3.6 install -r requirements.txtr &>>${log}
+  func_exit_status
+
+  func_systemctl
+}
