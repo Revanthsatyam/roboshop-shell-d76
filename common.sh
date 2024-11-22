@@ -98,9 +98,9 @@ func_java() {
 
   func_appreq
 
-  echo -e "\e[36m>>>>>>>>> Download Dependencies <<<<<<<<<<\e[0m"
+  echo -e "\e[36m>>>>>>>>> Build ${component} service <<<<<<<<<<\e[0m"
   mvn clean package &>>${log}
-  mv target/shipping-1.0.jar shipping.jar &>>${log}
+  mv target/${component}-1.0.jar ${component}.jar &>>${log}
   func_exit_status
 
   func_systemctl
@@ -117,7 +117,7 @@ func_python() {
 
   func_appreq
 
-  echo -e "\e[36m>>>>>>>>> Download Dependencies <<<<<<<<<<\e[0m"
+  echo -e "\e[36m>>>>>>>>> Build ${component} service <<<<<<<<<<\e[0m"
   pip3.6 install -r requirements.txtr &>>${log}
   func_exit_status
 
