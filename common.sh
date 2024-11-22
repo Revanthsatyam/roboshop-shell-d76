@@ -118,7 +118,7 @@ func_python() {
   func_appreq
 
   echo -e "\e[36m>>>>>>>>> Build ${component} service <<<<<<<<<<\e[0m"
-  pip3.6 install -r requirements.txtr &>>${log}
+  pip3.6 install -r requirements.txt &>>${log}
   func_exit_status
 
   func_systemctl
