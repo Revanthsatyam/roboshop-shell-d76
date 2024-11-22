@@ -2,6 +2,8 @@ source common.sh
 
 component=dispatch
 
+func_golang
+
 #dnf install golang -y
 #useradd roboshop
 #mkdir /app

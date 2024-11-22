@@ -2,6 +2,8 @@ source common.sh
 
 component=payment
 
+func_python
+
 #dnf install python36 gcc python3-devel -y
 #useradd roboshop
 #mkdir /app
