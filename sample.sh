@@ -4,7 +4,7 @@ a=0
 b=0
 c=0
 
-for (( i = 1; i = day; i++ )); do
+for (( i = 1; i <= day; i++ )); do
   a=$((a+1))
   echo $a
   b=$((a+1))
