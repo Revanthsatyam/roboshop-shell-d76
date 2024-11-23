@@ -8,9 +8,11 @@ for (( i = 1; i <= day; i++ )); do
   a=$((a+1))
   b=$((a+1))
   c=$((b+1))
-  max_height=$c
+  if [ $i -eq ${day} ]; then
+    echo "Max Height for the day is =$c"
+    echo "BaseCamp for the day is =$a"
+  fi
   base_camp=$a
   b=$base_camp
   c=$base_camp
-  echo $c
 done
