@@ -6,9 +6,11 @@ c=0
 
 for (( i = 1; i <= day; i++ )); do
   a=$((a+1))
-  echo $a
   b=$((a+1))
-  echo $b
   c=$((b+1))
+  max_height=$c
+  base_camp=$a
+  b=$base_camp
+  c=$base_camp
   echo $c
 done
