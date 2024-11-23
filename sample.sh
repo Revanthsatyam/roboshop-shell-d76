@@ -4,12 +4,11 @@ a=0
 b=0
 c=0
 
-for i in 1..${day}; do
-#  a=$((a+1))
-#  echo $a
-#  b=$((a+1))
-#  echo $b
-#  c=$((b+1))
-#  echo $c
-   echo $i
+for i in 1..$((${day}+1)); do
+  a=$((a+1))
+  echo $a
+  b=$((a+1))
+  echo $b
+  c=$((b+1))
+  echo $c
 done
