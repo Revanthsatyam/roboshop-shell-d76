@@ -13,5 +13,5 @@ systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
 cp mongo.repo /etc/yum.repos.d/mongo.repo
-dnf install mongodb-org-shell -y
+dnf install mongodb-org -y
 mongo --host mongodb-dev.rsdevops.in </app/schema/catalogue.js
