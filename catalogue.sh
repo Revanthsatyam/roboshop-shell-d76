@@ -1,4 +1,5 @@
 cp catalogue.service /etc/systemd/system/catalogue.service
+cp mongo.repo /etc/yum.repos.d/mongo.repo
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
 dnf install nodejs -y
@@ -12,6 +13,5 @@ npm install
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-dnf install mongodb-org -y
+dnf install mongodb-org-shell -y
 mongo --host mongodb-dev.rsdevops.in </app/schema/catalogue.js
