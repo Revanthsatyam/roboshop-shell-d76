@@ -117,3 +117,19 @@ func_python() {
 
   func_sysd
 }
+
+func_go() {
+  echo -e "\e[36m>>>>>>>>> Install GoLang <<<<<<<<<<\e[0m"
+  dnf install golang -y &>>${log}
+  func_exit_stat
+
+  func_appreq
+
+  echo -e "\e[36m>>>>>>>>> Install Dependencies <<<<<<<<<<\e[0m"
+  go mod init dispatch &>>${log}
+  go get &>>${log}
+  go build &>>${log}
+  func_exit_stat
+
+  func_sysd
+}
