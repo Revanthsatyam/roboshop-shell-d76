@@ -16,19 +16,13 @@ func_sysd() {
   func_exit_stat
 }
 
-func_nodejs() {
+func_appreq() {
   echo -e "\e[36m>>>>>>>>> Copy ${component} Service <<<<<<<<<<\e[0m"
   cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 
   if [ "${component}" == catalogue ]; then
     cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
   fi
-  func_exit_stat
-
-  echo -e "\e[36m>>>>>>>>> Install NodeJS <<<<<<<<<<\e[0m"
-  dnf module disable nodejs -y &>>${log}
-  dnf module enable nodejs:18 -y &>>${log}
-  dnf install nodejs -y &>>${log}
   func_exit_stat
 
   echo -e "\e[36m>>>>>>>>> Create Roboshop User <<<<<<<<<<\e[0m"
@@ -51,6 +45,16 @@ func_nodejs() {
   cd /app
   unzip /tmp/${component}.zip &>>${log}
   func_exit_stat
+}
+
+func_nodejs() {
+  echo -e "\e[36m>>>>>>>>> Install NodeJS <<<<<<<<<<\e[0m"
+  dnf module disable nodejs -y &>>${log}
+  dnf module enable nodejs:18 -y &>>${log}
+  dnf install nodejs -y &>>${log}
+  func_exit_stat
+
+  func_appreq
 
   echo -e "\e[36m>>>>>>>>> Install Dependencies <<<<<<<<<<\e[0m"
   npm install &>>${log}
@@ -70,34 +74,11 @@ func_nodejs() {
 }
 
 func_java() {
-  echo -e "\e[36m>>>>>>>>> Copy ${component} Service <<<<<<<<<<\e[0m"
-  cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
-  func_exit_stat
-
   echo -e "\e[36m>>>>>>>>> Install Java <<<<<<<<<<\e[0m"
   dnf install maven -y &>>${log}
   func_exit_stat
 
-  echo -e "\e[36m>>>>>>>>> Create Roboshop User <<<<<<<<<<\e[0m"
-  id roboshop &>>${log}
-  if [ "$?" != 0 ]; then
-    useradd roboshop &>>${log}
-  fi
-  func_exit_stat
-
-  echo -e "\e[36m>>>>>>>>> Cleanup Existing Application Content <<<<<<<<<<\e[0m"
-  rm -rf /app &>>${log}
-  func_exit_stat
-
-  echo -e "\e[36m>>>>>>>>>>>>  Create Application Directory  <<<<<<<<<<<<\e[0m"
-  mkdir /app &>>${log}
-  func_exit_status
-
-  echo -e "\e[36m>>>>>>>>> Download ${component} Artifacts <<<<<<<<<<\e[0m"
-  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
-  cd /app
-  unzip /tmp/${component}.zip &>>${log}
-  func_exit_stat
+  func_appreq
 
   echo -e "\e[36m>>>>>>>>> Install Dependencies <<<<<<<<<<\e[0m"
   mvn clean package &>>${log}
