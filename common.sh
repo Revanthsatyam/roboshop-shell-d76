@@ -41,7 +41,7 @@ func_nodejs() {
   echo -e "\e[36m>>>>>>>>> Download ${component} Artifacts <<<<<<<<<<\e[0m"
   curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   cd /app
-  unzip /tmp/catalogue.zip &>>${log}
+  unzip /tmp/${component}.zip &>>${log}
   func_exit_stat
 
   echo -e "\e[36m>>>>>>>>> Install Dependencies <<<<<<<<<<\e[0m"
