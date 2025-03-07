@@ -12,8 +12,30 @@ func_sysd() {
   echo -e "\e[36m>>>>>>>>> Start ${component} Service <<<<<<<<<<\e[0m"
   systemctl daemon-reload &>>${log}
   systemctl enable ${component} &>>${log}
-  systemctl start ${component} &>>${log}
+  systemctl restart ${component} &>>${log}
   func_exit_stat
+}
+
+func_schema() {
+  if [ "${schema_type}" == mongodb ]; then
+    echo -e "\e[36m>>>>>>>>> Install Mongo Client <<<<<<<<<<\e[0m"
+    dnf install mongodb-org-shell -y &>>${log}
+    func_exit_stat
+
+    echo -e "\e[36m>>>>>>>>> Load Schema <<<<<<<<<<\e[0m"
+    mongo --host mongodb-dev.rsdevops.in </app/schema/${component}.js &>>${log}
+    func_exit_stat
+  fi
+
+  if [ "${schema_type}" == mysql ]; then
+    echo -e "\e[36m>>>>>>>>> Install MySQL Client <<<<<<<<<<\e[0m"
+    dnf install mysql -y &>>${log}
+    func_exit_stat
+
+    echo -e "\e[36m>>>>>>>>> Load Schema <<<<<<<<<<\e[0m"
+    mysql -h mysql-dev.rsdevops.in -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
+    func_exit_stat
+  fi
 }
 
 func_appreq() {
@@ -60,17 +82,9 @@ func_nodejs() {
   npm install &>>${log}
   func_exit_stat
 
+  func_schema
+
   func_sysd
-
-  if [ "${component}" == catalogue ]; then
-    echo -e "\e[36m>>>>>>>>> Install Mongo Client <<<<<<<<<<\e[0m"
-    dnf install mongodb-org-shell -y &>>${log}
-    func_exit_stat
-
-    echo -e "\e[36m>>>>>>>>> Load Schema <<<<<<<<<<\e[0m"
-    mongo --host mongodb-dev.rsdevops.in </app/schema/catalogue.js &>>${log}
-    func_exit_stat
-  fi
 }
 
 func_java() {
@@ -85,14 +99,7 @@ func_java() {
   mv target/shipping-1.0.jar shipping.jar &>>${log}
   func_exit_stat
 
+  func_schema
+
   func_sysd
-
-  echo -e "\e[36m>>>>>>>>> Install MySQL Client <<<<<<<<<<\e[0m"
-  dnf install mysql -y &>>${log}
-  func_exit_stat
-
-  echo -e "\e[36m>>>>>>>>> Load Schema <<<<<<<<<<\e[0m"
-  mysql -h mysql-dev.rsdevops.in -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>${log}
-  systemctl restart shipping &>>${log}
-  func_exit_stat
 }
