@@ -31,7 +31,7 @@ func_nodejs() {
   func_exit_stat
 
   echo -e "\e[36m>>>>>>>>> Download ${component} Artifacts <<<<<<<<<<\e[0m"
-  rmdir app
+  rmdir -f app &>>${log}
   mkdir /app &>>${log}
   curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   cd /app
