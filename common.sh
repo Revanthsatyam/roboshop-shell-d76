@@ -30,9 +30,15 @@ func_nodejs() {
   fi
   func_exit_stat
 
-  echo -e "\e[36m>>>>>>>>> Download ${component} Artifacts <<<<<<<<<<\e[0m"
-  rmdir -f app &>>${log}
+  echo -e "\e[36m>>>>>>>>> Cleanup Existing Application Content <<<<<<<<<<\e[0m"
+  rm -rf /app &>>${log}
+  func_exit_stat
+
+  echo -e "\e[36m>>>>>>>>>>>>  Create Application Directory  <<<<<<<<<<<<\e[0m"
   mkdir /app &>>${log}
+  func_exit_status
+
+  echo -e "\e[36m>>>>>>>>> Download ${component} Artifacts <<<<<<<<<<\e[0m"
   curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   cd /app
   unzip /tmp/catalogue.zip &>>${log}
