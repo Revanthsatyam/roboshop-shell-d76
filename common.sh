@@ -5,7 +5,7 @@ func_nodejs() {
   cp catalogue.service /etc/systemd/system/catalogue.service &>>${log}
   cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
 
-  echo -e "\e[36m>>>>>>>>> Install NodeJS Service <<<<<<<<<<\e[0m"
+  echo -e "\e[36m>>>>>>>>> Install NodeJS <<<<<<<<<<\e[0m"
   dnf module disable nodejs -y &>>${log}
   dnf module enable nodejs:18 -y &>>${log}
   dnf install nodejs -y &>>${log}
