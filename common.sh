@@ -60,7 +60,7 @@ func_appreq() {
 
   echo -e "\e[36m>>>>>>>>>>>>  Create Application Directory  <<<<<<<<<<<<\e[0m"
   mkdir /app &>>${log}
-  func_exit_status
+  func_exit_stat
 
   echo -e "\e[36m>>>>>>>>> Download ${component} Artifacts <<<<<<<<<<\e[0m"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
